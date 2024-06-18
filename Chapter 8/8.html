@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Using the continue Statement in a for Statement</title>
+</head>
+<body>
+<script>
+for (var count = 1; count <= 10; ++count) {
+    if (count == 5) {
+        continue; // skip remaining loop code only if count == 5
+    }
+    document.writeln(count + " ");
+}
+document.writeln("<p>Used continue to skip printing 5</p>");
+</script>
+</body>
+</html>

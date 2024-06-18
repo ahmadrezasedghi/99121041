@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Recursive Factorial Function</title>
+<style type="text/css">
+p { margin: 0px; }
+</style>
+<script>
+var output = "";
+
+function calculateFactorials()
+{
+    for ( var i = 0; i <= 10; ++i ) 
+    {
+        output += "<p>" + i + "! = " + factorial(i) + "</p>";
+    }
+    
+    document.getElementById( "results" ).innerHTML = output;
+}
+
+function factorial(n)
+{
+    if (n === 0) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+</script>
+</head>
+<body>
+<h1>Factorials of 0 to 10</h1>
+<div id="results"></div>
+<button onclick="calculateFactorials()">Calculate Factorials</button>
+</body>
+</html>

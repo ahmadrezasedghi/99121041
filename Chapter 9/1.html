@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>A Programmer-Defined square Function</title>
+<style type="text/css">
+p { margin: 0; }
+</style>
+<script>
+
+document.writeln("<h1>Square the numbers from 1 to 10</h1>");
+
+function square(number) {
+    return number * number;
+}
+
+for (var x = 1; x <= 10; ++x) {
+    document.writeln("<p>The square of " + x + " is " + square(x) + "</p>");
+}
+
+</script>
+</head>
+<body></body>
+</html>

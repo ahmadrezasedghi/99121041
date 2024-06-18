@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset = "utf-8">
+<title>Class Average Program</title> 
+<script>
+var total = 0;
+var gradeCounter = 0;
+var grade;
+var gradeValue;
+var average;
+
+while (gradeCounter < 4) {
+
+    grade = window.prompt("Enter integer grade:", "0");
+
+    gradeValue = parseInt(grade);
+
+    total += gradeValue; 
+
+    gradeCounter += 1;
+}
+
+average = total / 4;
+document.writeln("<h1>Class average is " + average + "</h1>");
+</script>
+</head>
+<body></body>
+</html>

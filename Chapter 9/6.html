@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>Craps Game Simulation</title>
+<style type="text/css">
+p.red { color: red }
+img { width: 54px; height: 54px; }
+div { border: 5px ridge royalblue; padding: 10px; width: 120px; margin-bottom: 10px; }
+.point { margin: 0px; }
+</style>
+<script>
+var pointDie1Img;
+var pointDie2Img;
+var rollDie1Img;
+var rollDie2Img;
+var messages;
+var playButton;
+var rollButton;
+var dicerolling;
+
+var myPoint;
+var die1Value;
+var die2Value;
+
+function startGame() {
+    dicerolling = document.getElementById("dicerolling");
+    pointDie1Img = document.getElementById("pointDie1");
+    pointDie2Img = document.getElementById("pointDie2");
+    rollDie1Img = document.getElementById("rollDie1");
+    rollDie2Img = document.getElementById("rollDie2");
+    messages = document.getElementById("messages");
+    playButton = document.getElementById("play");
+    rollButton = document.getElementById("roll");
+
+    setImage(pointDie1Img);
+    setImage(pointDie2Img);
+    setImage(rollDie1Img);
+    setImage(rollDie2Img);
+
+    myPoint = 0;
+    messages.innerHTML = "Click Roll to start the game.";
+    playButton.disabled = true;
+    rollButton.disabled = false;
+}
+
+function firstRoll() {
+    var sumOfDice = rollDice();
+
+    switch (sumOfDice) {
+        case 7: case 11:
+            messages.innerHTML = "You Win!!! Click Play to play again.";
+            playButton.disabled = false;
+            rollButton.disabled = true;
+            break;
+        case 2: case 3: case 12:
+            messages.innerHTML = "Sorry. You Lose. Click Play to play again.";
+            playButton.disabled = false;
+            rollButton.disabled = true;
+            break;
+        default:
+            myPoint = sumOfDice;
+            setImage(pointDie1Img, die1Value);
+            setImage(pointDie2Img, die2Value);
+            messages.innerHTML = "Roll Again!";
+            playButton.disabled = true;
+            rollButton.disabled = false;
+            break;
+    }
+}
+
+function rollAgain() {
+    var sumOfDice = rollDice();
+
+    if (sumOfDice == myPoint) {
+        messages.innerHTML = "You Win!!! Click Play to play again.";
+        rollButton.disabled = true;
+        playButton.disabled = false;
+    } else if (sumOfDice == 7) {
+        messages.innerHTML = "Sorry. You Lose. Click Play to play again.";
+        rollButton.disabled = true;
+        playButton.disabled = false;
+    }
+}
+
+function rollDice() {
+    dicerolling.play();
+
+    die1Value = NaN;
+    die2Value = NaN;
+    showDice();
+
+    die1Value = Math.floor(1 + Math.random() * 6);
+    die2Value = Math.floor(1 + Math.random() * 6);
+    showDice();
+
+    return die1Value + die2Value;
+}
+
+function showDice() {
+    setImage(rollDie1Img, die1Value);
+    setImage(rollDie2Img, die2Value);
+}
+
+function setImage(dieImg, dieValue) {
+    if (dieValue) {
+        dieImg.src = "die" + dieValue + ".png";
+    } else {
+        dieImg.src = "blank.png";
+    }
+}
+
+function start() {
+    var playButton = document.getElementById("play");
+    playButton.addEventListener("click", startGame, false);
+    var rollButton = document.getElementById("roll");
+    rollButton.addEventListener("click", firstRoll, false);
+}
+
+window.addEventListener("load", start, false);
+</script>
+</head>
+<body>
+<p><a href="CrapsRules.html">Click here for a short video explaining the basic Craps rules</a></p>
+<div id="pointDiv">
+    <p class="point">Point is:</p>
+    <img id="pointDie1" src="blank.png" alt="Die 1 of Point Value">
+    <img id="pointDie2" src="blank.png" alt="Die 2 of Point Value">
+</div>
+<div class="rollDiv">
+    <img id="rollDie1" src="blank.png" alt="Die 1 of Roll Value">
+    <img id="rollDie2" src="blank.png" alt="Die 2 of Roll Value">
+</div>
+<form action="#">
+    <input id="play" type="button" value="Play">
+    <input id="roll" type="button" value="Roll">
+</form>
+<p id="messages" class="red">Click Play to start the game</p>
+</body>
+</html>
